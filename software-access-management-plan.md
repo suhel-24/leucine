@@ -72,6 +72,7 @@ password: string;
 @Column()
 role: 'Employee' | 'Manager' | 'Admin';
 }
+
 Software Entity
 @Entity()
 class Software {
@@ -101,6 +102,13 @@ reason: string;
 
 status: 'Pending' | 'Approved' | 'Rejected';
 }
+
+## Functionalities
+Sign-Up / Login with JWT
+Role-based redirection
+Software management (Admin only)
+Request access to software (Employee)
+Approve/reject requests (Manager)
 
 
 

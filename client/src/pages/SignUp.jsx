@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
     const [username, setUsername] = useState('');
@@ -7,7 +8,7 @@ export default function SignUp() {
     const [role, setRole] = useState('employee');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
-
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         setMessage('');
@@ -18,6 +19,7 @@ export default function SignUp() {
             setUsername('');
             setPassword('');
             setRole('employee');
+            navigate('/login');
         } catch (err) {
             setError(err.response?.data?.message || 'Sign up failed');
         }
@@ -34,7 +36,7 @@ export default function SignUp() {
                     <option value="manager">Manager</option>
                     <option value="admin">Admin</option>
                 </select>
-                <button type="submit" className="bg-blue-500 text-white p-2 rounded">Sign Up</button>
+                <button type="submit" className="cursor-pointer bg-blue-500 text-white p-2 rounded">Sign Up</button>
             </form>
             {message && <div className="text-green-600 mt-2">{message}</div>}
             {error && <div className="text-red-600 mt-2">{error}</div>}

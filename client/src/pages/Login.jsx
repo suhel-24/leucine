@@ -16,7 +16,9 @@ export default function Login() {
         try {
             const res = await axios.post('http://localhost:5000/api/auth/login', { username, password });
             auth.login(res.data.token, res.data.role);
-            navigate('/');
+            if (res.data.role === 'admin') navigate('/create-software');
+            else if (res.data.role === 'manager') navigate('/pending-requests');
+            else navigate('/request-access');
         } catch (err) {
             setError(err.response?.data?.message || 'Login failed');
         }

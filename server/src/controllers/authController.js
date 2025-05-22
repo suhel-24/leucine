@@ -1,4 +1,3 @@
-const { getRepository } = require('typeorm');
 const bcrypt = require('bcrypt');
 const User = require('../entities/User');
 const jwt = require('jsonwebtoken');
@@ -6,7 +5,7 @@ const jwt = require('jsonwebtoken');
 exports.signup = async (req, res) => {
     const { username, password, role } = req.body;
     try {
-        const userRepo = getRepository('User');
+        const userRepo = req.app.locals.dataSource.getRepository('User');
         const existing = await userRepo.findOne({ where: { username } });
         if (existing) {
             return res.status(400).json({ message: 'Username already exists' });
@@ -23,7 +22,7 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
     const { username, password } = req.body;
     try {
-        const userRepo = getRepository('User');
+        const userRepo = req.app.locals.dataSource.getRepository('User');
         const user = await userRepo.findOne({ where: { username } });
         if (!user) {
             return res.status(400).json({ message: 'Invalid credentials' });
