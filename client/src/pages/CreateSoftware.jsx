@@ -29,7 +29,7 @@ export default function CreateSoftware() {
     setIsLoading(true);
     try {
       const res = await axios.post(
-        'http://localhost:5000/api/software',
+        `${import.meta.env.VITE_API_URL}/api/software`,
         {
           name,
           description,

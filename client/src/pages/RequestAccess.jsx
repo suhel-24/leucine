@@ -16,7 +16,7 @@ export default function RequestAccess() {
         async function fetchSoftware() {
             try {
                 setIsLoading(true);
-                const res = await axios.get('http://localhost:5000/api/software', {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/software`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setSoftwareList(res.data);
@@ -39,7 +39,7 @@ export default function RequestAccess() {
         setError('');
         setIsLoading(true);
         try {
-            await axios.post('http://localhost:5000/api/requests', {
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/requests`, {
                 softwareId: selectedSoftware,
                 accessType: accessLevel,
                 reason,

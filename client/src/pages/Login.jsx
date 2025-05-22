@@ -14,7 +14,7 @@ export default function Login() {
         e.preventDefault();
         setError('');
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/login', { username, password });
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { username, password });
             auth.login(res.data.token, res.data.role);
             if (res.data.role === 'admin') navigate('/create-software');
             else if (res.data.role === 'manager') navigate('/pending-requests');

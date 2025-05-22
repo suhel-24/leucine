@@ -13,7 +13,7 @@ export default function PendingRequests() {
         async function fetchRequests() {
             setIsLoading(true);
             try {
-                const res = await axios.get('http://localhost:5000/api/requests/pendingrequests', {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/requests/pendingrequests`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setRequests(res.data.filter(r => r.status === 'Pending'));
@@ -31,7 +31,7 @@ export default function PendingRequests() {
         setMessage('');
         setIsLoading(true);
         try {
-            await axios.patch(`http://localhost:5000/api/requests/${id}`, { status }, {
+            await axios.patch(`${import.meta.env.VITE_API_URL}/api/requests/${id}`, { status }, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setMessage(`Request ${status.toLowerCase()} successfully!`);
